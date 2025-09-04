@@ -4,8 +4,8 @@ const port = 3000;
 
 // Data berbentuk array json
 let movie = [
-    { id: 1, title: "JAV", director: "Salam", year: "1999"},
-    { id: 2, title: "Anime", director: "Salam", year: "1999"}
+    { id: 1, title: "Anime Baru", director: "Salam", year: "1999"},
+    { id: 2, title: "Anime Lama", director: "Salam", year: "1999"}
 ];
 let directors = [
     { id: 1, name: "Salam Rizqi Mulia", birthYear: "2005"},
