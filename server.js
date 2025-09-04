@@ -2,11 +2,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+// Data berbentuk array json
 let movie = [
     { id: 1, title: "JAV", director: "Salam", year: "1999"},
     { id: 2, title: "Anime", director: "Salam", year: "1999"}
 ];
-
 let directors = [
     { id: 1, name: "Salam Rizqi Mulia", birthYear: "2005"},
     { id: 2, name: "Andi Frimawan", birthYear: "2001"}
@@ -15,7 +15,7 @@ let directors = [
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Selamat datang di Rest API pertamamu!');
+    res.send('Selamat datang di Rest API!');
 });
 
 // Mengembalikan daftar semua sutradara
@@ -62,16 +62,18 @@ app.delete('/directors/:id', (req, res) => {
     const id = Number(req.params.id);
     const directorIndex = directors.findIndex(m => m.id === id);
     if (directorIndex === -1) {
-        return res.status(404).json({ error: `Diretor tidak ditemukan` });
+        return res.status(404).json({ error: `Director tidak ditemukan` });
     }
     directors.splice(directorIndex, 1);
     res.status(204).send();
 });
 
+// Mengembalikkan daftar semua movie
 app.get('/movie', (req, res) => {
     res.json(movie);
 });
 
+// Mengembalikan detail satu movie
 app.get('/movie/:id', (req, res) => {
     const getMovie = movie.find(m => m.id === parseInt(req.params.id));
     if (getMovie) {
@@ -81,7 +83,7 @@ app.get('/movie/:id', (req, res) => {
     }
 });
 
-// POST - Membuat film baru
+// Membuat movie baru, dengan melakukan validasi memastikan name dan birthyear disertakan.
 app.post('/movie', (req, res) => {
     const { title, director, year } = req.body || {};
     if (!title || !director || !year) {
@@ -92,7 +94,7 @@ app.post('/movie', (req, res) => {
     res.status(201).json(newMovie);
 });
 
-// PUT - Memperbarui data film
+// Memperbarui data movie
 app.put('/movie/:id', (req, res) => {
     const id = Number(req.params.id);
     const movieIndex = movie.findIndex(m => m.id === id);
@@ -105,7 +107,7 @@ app.put('/movie/:id', (req, res) => {
     res.json(updateMovie);
 });
 
-// DELETE - Mengapus film
+// Menghapus data movie
 app.delete('/movie/:id', (req, res) => {
     const id = Number(req.params.id);
     const movieIndex = movie.findIndex(m => m.id === id);
@@ -114,6 +116,11 @@ app.delete('/movie/:id', (req, res) => {
     }
     movie.splice(movieIndex, 1);
     res.status(204).send();
+});
+
+app.use((err, req, res, _next) => {
+    console.error(`[ERROR]`, err);
+    res.status(500).json({ error: `Terjadi kesalahan pada server` });
 });
 
 app.listen(port, () => {
