@@ -1,0 +1,14 @@
+{
+  "name": "test2",
+  "version": "1.0.0",
+  "description": "COBA JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "salam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
