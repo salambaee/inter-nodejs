@@ -45,6 +45,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MTEyNywiZXhwIjoxNzYyNDU0NzI3fQ.JK0FvbLnByy4S2uWKGb6gzGKMVkIPtwGu1ffQGOJKm8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -101,6 +111,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MTEyNywiZXhwIjoxNzYyNDU0NzI3fQ.JK0FvbLnByy4S2uWKGb6gzGKMVkIPtwGu1ffQGOJKm8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -113,46 +133,6 @@
 					"path": [
 						"movies",
 						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ERROR_GET_MOVIES_BY_ID",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code harus 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Response harus ada field error\", function () {",
-							"    const jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property(\"error\");",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/movies/9999",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"movies",
-						"9999"
 					]
 				}
 			},
@@ -182,6 +162,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MTEyNywiZXhwIjoxNzYyNDU0NzI3fQ.JK0FvbLnByy4S2uWKGb6gzGKMVkIPtwGu1ffQGOJKm8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -225,6 +215,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MTEyNywiZXhwIjoxNzYyNDU0NzI3fQ.JK0FvbLnByy4S2uWKGb6gzGKMVkIPtwGu1ffQGOJKm8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -269,10 +269,20 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MTEyNywiZXhwIjoxNzYyNDU0NzI3fQ.JK0FvbLnByy4S2uWKGb6gzGKMVkIPtwGu1ffQGOJKm8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/movies/1",
+					"raw": "http://localhost:3000/movies/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -280,7 +290,231 @@
 					"port": "3000",
 					"path": [
 						"movies",
-						"1"
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH_REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"salambae\",\n    \"password\": \"sevila123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH_LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"salambae\",\n    \"password\": \"sevila123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST_DIRECTORS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MDI2NywiZXhwIjoxNzYyNDUzODY3fQ.-4HDuP2x29nWa_6suLYR2L-6y5rwAka367dnTbXnkWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Adji Pamungkas\",\n    \"birthYear\": \"2000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/directors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_DIRECTORS_BY_ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MDI2NywiZXhwIjoxNzYyNDUzODY3fQ.-4HDuP2x29nWa_6suLYR2L-6y5rwAka367dnTbXnkWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/directors/32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"directors",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT_DIRECTORS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MDI2NywiZXhwIjoxNzYyNDUzODY3fQ.-4HDuP2x29nWa_6suLYR2L-6y5rwAka367dnTbXnkWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sevila Virdasari\",\n    \"birthYear\": \"2006\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/directors/34",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"directors",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_DIRECTORS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MDI2NywiZXhwIjoxNzYyNDUzODY3fQ.-4HDuP2x29nWa_6suLYR2L-6y5rwAka367dnTbXnkWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/directors/35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"directors",
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_DIRECTORS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InNhbGFtYmFlIn0sImlhdCI6MTc2MjQ1MDI2NywiZXhwIjoxNzYyNDUzODY3fQ.-4HDuP2x29nWa_6suLYR2L-6y5rwAka367dnTbXnkWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/directors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"directors"
 					]
 				}
 			},
