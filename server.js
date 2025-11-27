@@ -14,6 +14,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(cors());
 app.use(express.json());
 
+
+app.get('/', (req, res) => {
+    res.json({ message: "Salah rute kaleehhhhh"});
+})
 // === STATUS ROUTE ===
 app.get('/status', (req, res) => {
   res.json({ ok: true, service: 'film-api' });
