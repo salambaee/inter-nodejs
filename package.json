@@ -4,6 +4,7 @@
   "description": "COBA JS",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "test"
   },
   "author": "salam",
