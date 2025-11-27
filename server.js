@@ -158,44 +158,59 @@ app.post('/movies', authenticateToken, async (req, res, next) => {
   }
 });
 
-app.put('/movies/:id', [authenticateToken, authorizeRole('admin')], async (req, res, next) => {
-  const { title, director_id, year } = req.body;
+app.put(
+  '/movies/:id',
+  authenticateToken,
+  authorizeRole('admin'),
+  async (req, res, next) => {
+    const { title, director_id, year } = req.body;
 
-  const sql = `
-    UPDATE movies
-    SET title = $1, director_id = $2, year = $3
-    WHERE id = $4
-    RETURNING *
-  `;
-
-  try {
-    const result = await db.query(sql, [title, director_id, year, req.params.id]);
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ error: 'Film tidak ditemukan' });
+    if (!title || !director_id || !year) {
+      return res.status(400).json({ error: 'title, director_id, year wajib diisi' });
     }
 
-    res.json(result.rows[0]);
-  } catch (err) {
-    next(err);
-  }
-});
+    const sql = `
+      UPDATE movies
+      SET title = $1, director_id = $2, year = $3
+      WHERE id = $4
+      RETURNING *
+    `;
 
-app.delete('/movies/:id', [authenticateToken, authorizeRole('admin')], async (req, res, next) => {
-  const sql = 'DELETE FROM movies WHERE id = $1 RETURNING *';
+    try {
+      const result = await db.query(sql, [title, director_id, year, req.params.id]);
 
-  try {
-    const result = await db.query(sql, [req.params.id]);
+      if (result.rowCount === 0) {
+        return res.status(404).json({ error: 'Film tidak ditemukan' });
+      }
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({ error: 'Film tidak ditemukan' });
+      res.json(result.rows[0]);
+    } catch (err) {
+      next(err);
     }
-
-    res.status(204).send();
-  } catch (err) {
-    next(err);
   }
-});
+);
+
+
+app.delete(
+  '/movies/:id',
+  authenticateToken,
+  authorizeRole('admin'),
+  async (req, res, next) => {
+    const sql = 'DELETE FROM movies WHERE id = $1 RETURNING *';
+
+    try {
+      const result = await db.query(sql, [req.params.id]);
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({ error: 'Film tidak ditemukan' });
+      }
+
+      res.status(204).send();
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 // === DIRECTOR ROUTES (TUGAS PRAKTIKUM) ===
 // Refactor sendiri sesuai pola movies
@@ -213,5 +228,8 @@ app.use((err, req, res, next) => {
 //app.listen(PORT, '0.0.0.0', () => {
 //  console.log(`Server aktif di http://localhost:${PORT}`);
 //});
-
-module.exports = app;
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server aktif di http://localhost:${PORT}`);
+  });
+}
