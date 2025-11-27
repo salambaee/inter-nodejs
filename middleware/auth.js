@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Middleware untuk autentikasi token
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -20,7 +19,6 @@ function authenticateToken(req, res, next) {
     });
 }
 
-// Middleware untuk membatasi akses berdasarkan role
 function authorizeRole(role) {
     return (req, res, next) => {
         if (req.user && req.user.role === role) {

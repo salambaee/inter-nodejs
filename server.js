@@ -10,20 +10,18 @@ const app = express();
 const PORT = 3300;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// === MIDDLEWARE ===
+
 app.use(cors());
 app.use(express.json());
 
-
 app.get('/', (req, res) => {
-    res.json({ message: "Salah rute kaleehhhhh"});
+    res.json({ message: "Direct to /status", powered_by: "Salam Rizqi Mulia"});
 })
-// === STATUS ROUTE ===
+
 app.get('/status', (req, res) => {
   res.json({ ok: true, service: 'film-api' });
 });
 
-// === AUTH ROUTES ===
 const validateUserInput = (username, password) => {
   if (!username || !password || password.length < 6) {
     return 'Username dan password (min 6 char) harus diisi';
@@ -88,7 +86,6 @@ app.post('/auth/login', async (req, res, next) => {
   }
 });
 
-// === MOVIE ROUTES ===
 app.get('/movies', async (req, res, next) => {
   const sql = `
     SELECT m.id, m.title, m.year, d.id AS director_id, d.name AS director_name
@@ -158,7 +155,6 @@ app.delete('/movies/:id', authenticateToken, authorizeRole('admin'), async (req,
   }
 });
 
-// === DIRECTOR ROUTES ===
 app.get('/directors', async (req, res, next) => {
   const sql = 'SELECT * FROM directors ORDER BY id ASC';
   try {
@@ -218,14 +214,12 @@ app.delete('/directors/:id', authenticateToken, authorizeRole('admin'), async (r
   }
 });
 
-// === FALLBACK & ERROR HANDLING ===
 app.use((req, res) => res.status(404).json({ error: 'Rute tidak ditemukan' }));
 app.use((err, req, res, next) => {
   console.error('[SERVER ERROR]', err.stack);
   res.status(500).json({ error: 'Terjadi kesalahan pada server' });
 });
 
-// === START SERVER ===
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server aktif di http://localhost:${PORT}`);
 });
